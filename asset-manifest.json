@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/banking-app/static/css/main.073c9b0a.css",
-    "main.js": "/banking-app/static/js/main.e3172335.js",
+    "main.css": "/banking-app/static/css/main.ca57846c.css",
+    "main.js": "/banking-app/static/js/main.3f9d0404.js",
     "static/js/787.1ccb06c2.chunk.js": "/banking-app/static/js/787.1ccb06c2.chunk.js",
-    "static/media/logo.svg": "/banking-app/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/banking-app/index.html",
-    "main.073c9b0a.css.map": "/banking-app/static/css/main.073c9b0a.css.map",
-    "main.e3172335.js.map": "/banking-app/static/js/main.e3172335.js.map",
+    "main.ca57846c.css.map": "/banking-app/static/css/main.ca57846c.css.map",
+    "main.3f9d0404.js.map": "/banking-app/static/js/main.3f9d0404.js.map",
     "787.1ccb06c2.chunk.js.map": "/banking-app/static/js/787.1ccb06c2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.e3172335.js"
+    "static/css/main.ca57846c.css",
+    "static/js/main.3f9d0404.js"
   ]
 }
