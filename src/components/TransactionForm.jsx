@@ -138,7 +138,6 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
             onChange={(e) => setReceipt(e.currentTarget.checked)}
           />
         </div>
-        {/* <input type="hidden" value={timeDate} onChange={console.log(timeDate)}/> */}
         
         <div className="form-buttons-containers">
           <input 

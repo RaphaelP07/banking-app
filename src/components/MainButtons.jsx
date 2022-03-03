@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { GlobalContext } from "../context/GlobalState"
 
-const MainButtons = ({ onShow, toggleShowExpenses }) => {
+const MainButtons = ({ onShow, toggleShowTransactions }) => {
   const { setTransaction } = useContext(GlobalContext)
   const [transactionType, setTransactionType] = useState('')
 
@@ -44,10 +44,9 @@ const MainButtons = ({ onShow, toggleShowExpenses }) => {
       </button>
       <button 
         className="main-button expenses-button" 
-        onClick={() => toggleShowExpenses()}>
-        <h3>EXPENSES</h3>
+        onClick={() => toggleShowTransactions()}>
+        <h3>TRANSACTIONS</h3>
       </button>
-      {/* <button onClick={() => console.log(transaction)}>console log</button> */}
     </div>
   )
 }

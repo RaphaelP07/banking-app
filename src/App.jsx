@@ -5,6 +5,7 @@ import SignUpForm from './components/SignUpForm.jsx'
 import BankAccount from './components/BankAccount.jsx'
 import MainButtons from './components/MainButtons.jsx'
 import AccountName from './components/AccountName.jsx'
+import Transactions from './components/Transactions.jsx'
 import TransactionForm from './components/TransactionForm.jsx'
 import ConfirmTransaction from './components/ConfirmTransaction.jsx'
 
@@ -15,7 +16,7 @@ function App() {
   const [signUp, setSignUp] = useState(false)
   const [showTransactionForm, setShowTransactionForm] = useState(false)
   const [showConfirmPrompt, setShowConfirmPrompt] = useState(false)
-  const [showExpenses, setShowExpenses] = useState(false)
+  const [showTransactions, setShowTransactions] = useState(false)
   const [loggedId, setLoggedId] = useState(null)
   const [transferToAccountId, setTransferToAccountId] = useState(null)
   const [transferTo, setTransferTo] = useState(null)
@@ -50,7 +51,7 @@ function App() {
             <BankAccount loggedId={loggedId} />
             <MainButtons 
               onShow={() => setShowTransactionForm(true)}
-              toggleShowExpenses={() => setShowExpenses(!showExpenses)} />
+              toggleShowTransactions={() => setShowTransactions(!showTransactions)} />
           </section>
           <section className='transactions-container'>
             {showTransactionForm && 
@@ -70,7 +71,7 @@ function App() {
             }
           </section>
           <section className='expenses-container'>
-            <div></div>
+            {showTransactions && <Transactions loggedId={loggedId}/>}
           </section>
         </div>
       }
