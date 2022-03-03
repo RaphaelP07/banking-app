@@ -3,7 +3,7 @@ import { GlobalContext } from "../context/GlobalState"
 
 const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTransact, onDone }) => {
   const { accounts, transaction, setTransaction } = useContext(GlobalContext)
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState('')
   const [notes, setNotes] = useState('')
   const [receipt, setReceipt] = useState(false)
   const [transactionType, setTransactionType] = useState(transaction.transactionType)
@@ -89,9 +89,9 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
           PHP<input
             type='number'
             className='amount-input one-line margin-left'
-            step={100}
-            min={0}
+            min={100}
             value={amount}
+            step={.01}
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>

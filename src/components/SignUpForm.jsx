@@ -11,7 +11,7 @@ const SignUpForm = ({ backToSignIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [accAmount, setAccAmount] = useState(null)
+  const [accAmount, setAccAmount] = useState('')
   const [accNumber, setAccNumber] = useState('')
   const [id, setId] = useState(accounts.length+1)
   const [transactions, setTransactions] = useState([])
@@ -139,6 +139,8 @@ const SignUpForm = ({ backToSignIn }) => {
           <input
             type='number'
             className='confirm-password-input one-line'
+            step={.01}
+            value={accAmount}
             onChange={(e) => setAccAmount(e.target.value)}
             required
           />

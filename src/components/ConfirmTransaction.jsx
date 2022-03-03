@@ -56,7 +56,7 @@ const ConfirmTransaction = ({ onTransact, onDone, loggedId, transferId }) => {
               Amount:
             </div>
             <h2 className="item margin-left margin-bottom">
-              {transaction.amount}
+            {((transaction.amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h2>
           </div>
           {transaction.transferTo !== null && 
