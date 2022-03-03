@@ -29,6 +29,7 @@ const ConfirmTransaction = ({ onTransact, onDone, loggedId, transferId }) => {
   const receiveTransaction = () => {
     const receiveTransaction = {
       amount: transaction.amount,
+      timeDate: transaction.date,
       notes: transaction.notes,
       receipt: transaction.receipt,
       transactionType: 'RECEIVE',

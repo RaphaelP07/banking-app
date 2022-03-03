@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/GlobalState"
 const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTransact, onDone }) => {
   const { accounts, transaction, setTransaction } = useContext(GlobalContext)
   const [amount, setAmount] = useState('')
+  const [timeDate, setTimeDate] = useState('')
   const [notes, setNotes] = useState('')
   const [receipt, setReceipt] = useState(false)
   const [transactionType, setTransactionType] = useState(transaction.transactionType)
@@ -43,8 +44,11 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
       return
     }
 
+    // transactionDate()
+
     const newTransaction = {
       amount: +amount,
+      timeDate: timeDate,
       notes: notes,
       receipt: receipt,
       transactionType: transactionType,
@@ -59,6 +63,7 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
   const cancelTransaction = () => {
     setTransaction({
         amount: 0,
+        timeDate: '',
         notes: '',
         receipt: false,
         transactionType: '',
@@ -73,6 +78,16 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
 
     onDone()
   }
+
+  let d = new Date ()
+  const year = d.getFullYear()-2000
+  const date = d.getDate() > 9 ? d.getDate() : '0'.concat(d.getDate())
+  const month = d.getMonth()+1 > 9 ? d.getMonth() : '0'.concat(d.getMonth()+1)
+  const hours = d.getHours() > 9 ? d.getHours() : '0'.concat(d.getHours())
+  const minutes = d.getMinutes() > 9 ? d.getMinutes() : '0'.concat(d.getMinutes())
+  const seconds = d.getSeconds() > 9 ? d.getSeconds() : '0'.concat(d.getSeconds())
+
+  setTimeout(() => {setTimeDate(`${hours}:${minutes}:${seconds} on ${month}/${date}/${year}`)}, 1000)
 
   const checkAccNumbers = accounts.filter(account => {
     return account.accNumber === transferTo
@@ -123,15 +138,13 @@ const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTr
             onChange={(e) => setReceipt(e.currentTarget.checked)}
           />
         </div>
-        <input type="hidden" value={transactionType} />
-        <input type="hidden" value={transaction.transferTo === null ? 'n/a' : transaction.transferTo} />
+        {/* <input type="hidden" value={timeDate} onChange={console.log(timeDate)}/> */}
+        
         <div className="form-buttons-containers">
           <input 
             type='submit' 
             value='SUBMIT' 
             className='submit-button form-button' 
-            // onClick={onDone} 
-            // onMouseUp={() => updateAmount(transaction.amount)} 
           />
           <button 
             className="cancel-button form-button" 

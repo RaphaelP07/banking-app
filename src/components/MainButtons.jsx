@@ -10,6 +10,7 @@ const MainButtons = ({ onShow, toggleShowExpenses }) => {
 
     const newTransaction = {
       amount: 0,
+      timeDate: '',
       notes: '',
       receipt: false,
       transactionType: transactionType,

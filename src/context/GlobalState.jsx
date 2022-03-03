@@ -29,6 +29,7 @@ const initialState = {
   ],
   transaction: {
     amount: 0,
+    timeDate: '',
     notes: '',
     receipt: false,
     transactionType: '',
