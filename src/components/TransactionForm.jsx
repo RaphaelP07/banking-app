@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { GlobalContext } from "../context/GlobalState"
 
-const TransactionForm = ({ checkAccounts, getTransferToAccountId, getTransferTo, transactionType, onTransact, onDone, updateAmount }) => {
-  // const [transactionInfo, setTransactionInfo] = useState([])
-
+const TransactionForm = ({ getTransferToAccountId, getTransferTo, loggedId, onTransact, onDone }) => {
+  const { accounts, transaction, setTransaction } = useContext(GlobalContext)
   const [amount, setAmount] = useState(0)
   const [notes, setNotes] = useState('')
   const [receipt, setReceipt] = useState(false)
+  const [transactionType, setTransactionType] = useState(transaction.transactionType)
   const [transferTo, setTransferTo] = useState(null)
-  const [receiveTransaction, setReceiveTransaction] = useState(null)
 
   const transact = (e) => {
     e.preventDefault()
@@ -16,50 +16,86 @@ const TransactionForm = ({ checkAccounts, getTransferToAccountId, getTransferTo,
       alert('Please add an amount')
       return
     }
-
-    if (checkAccNumbers.length === 0 != transferTo === null) {
+    
+    if (checkAccNumbers.length === 0 != transaction.transferTo === null) {
       alert('Invalid account number')
       return
     }
-
+    
+    if (transactionType === 'WITHDRAW') {
+      if (amount>accounts[loggedId].accAmount) {
+        alert('You have insufficient funds for withdrawal')
+        return
+      }
+    }
+    
     if (transactionType === 'TRANSFER') {
+      if (amount>accounts[loggedId].accAmount) {
+        alert('You have insufficient funds for transfer')
+        return
+      }
       getTransferToAccountId(checkAccNumbers[0].id-1)
       getTransferTo(transferTo)
     }
     
+    if (amount > 25000) {
+      alert('The maximum transaction amount is PHP25,000')
+      return
+    }
 
-    onTransact({ transactionType, amount, notes, receipt, transferTo })
+    const newTransaction = {
+      amount: +amount,
+      notes: notes,
+      receipt: receipt,
+      transactionType: transactionType,
+      transferTo: transferTo
+    }
+    
+    setTransaction(newTransaction)
+    
+    onTransact()
+  }
+  
+  const cancelTransaction = () => {
+    setTransaction({
+        amount: 0,
+        notes: '',
+        receipt: false,
+        transactionType: '',
+        transferTo: null
+      })
 
-    setAmount('')
+    setAmount(0)
     setNotes('')
     setReceipt(false)
+    setTransactionType('')
     setTransferTo(null)
 
     onDone()
   }
 
-  const checkAccNumbers = checkAccounts.filter(account => {
+  const checkAccNumbers = accounts.filter(account => {
     return account.accNumber === transferTo
   })
 
   return (
-    <div>
-      <form className='form-container' onSubmit={transact}> 
+    <div className='form-container'>
+      <form className='transaction-form' onSubmit={transact}> 
         <h2 className='transaction-label'>
-          {transactionType}
+          {transaction.transactionType} 
         </h2>
         <div className='input-container'>
           <label className='form-label'>Amount</label>
-          <input
+          PHP<input
             type='number'
-            className='amount-input one-line'
+            className='amount-input one-line margin-left'
             step={100}
             min={0}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        {transactionType === 'TRANSFER' ? <div className='input-container'>
+        {transaction.transactionType === 'TRANSFER' ? <div className='input-container'>
           <label className='form-label'>Transfer to</label>
           <input
             type='text'
@@ -87,17 +123,19 @@ const TransactionForm = ({ checkAccounts, getTransferToAccountId, getTransferTo,
             onChange={(e) => setReceipt(e.currentTarget.checked)}
           />
         </div>
+        <input type="hidden" value={transactionType} />
+        <input type="hidden" value={transaction.transferTo === null ? 'n/a' : transaction.transferTo} />
         <div className="form-buttons-containers">
           <input 
             type='submit' 
             value='SUBMIT' 
             className='submit-button form-button' 
             // onClick={onDone} 
-            // onMouseUp={() => updateAmount(amount)} 
+            // onMouseUp={() => updateAmount(transaction.amount)} 
           />
           <button 
             className="cancel-button form-button" 
-            onClick={onDone}>CANCEL
+            onClick={cancelTransaction}>CANCEL
           </button>
         </div>
       </form>

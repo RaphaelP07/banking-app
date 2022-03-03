@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
-const SignUpForm = ({ checkAccounts, backToSignIn, onSignUp }) => {
+import { GlobalContext } from '../context/GlobalState'
+
+const SignUpForm = ({ backToSignIn }) => {
+  const { accounts } = useContext(GlobalContext)
+  const { addAccount } = useContext(GlobalContext)
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [accAmount, setAccAmount] = useState(0.00)
   const [accNumber, setAccNumber] = useState('')
-  const [id, setId] = useState(checkAccounts.length+1)
+  const [id, setId] = useState(accounts.length+1)
   const [transactions, setTransactions] = useState([])
-
+  const [admin, setAdmin] = useState(false)
+  
   const signUp = (e) => {
     e.preventDefault()
 
@@ -18,12 +25,30 @@ const SignUpForm = ({ checkAccounts, backToSignIn, onSignUp }) => {
       return
     }
 
-    onSignUp({ firstName, lastName, email, password, accAmount, accNumber, id, transactions })
+    if (confirmPassword !== password) {
+      alert('password confirmation incorrect')
+      return
+    }
+
+    const newAccount = {
+      accAmount: accAmount,
+      accNumber: accNumber,
+      admin: admin,
+      email: email,
+      firstName: firstName,
+      id: id,
+      lastName: lastName,
+      password: password,
+      transactions: transactions,
+    }
+
+    addAccount(newAccount)
 
     setFirstName('')
     setLastName('')
     setEmail('')
     setPassword('')
+    setConfirmPassword('')
     setAccNumber('')
 
     backToSignIn()
@@ -95,6 +120,7 @@ const SignUpForm = ({ checkAccounts, backToSignIn, onSignUp }) => {
           <input
             type='password'
             className='confirm-password-input one-line'
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </div>

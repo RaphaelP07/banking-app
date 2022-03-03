@@ -10,10 +10,6 @@ body {
   color: white;
 }
 
-/* .App {
-  text-align: center;
-} */
-
 .App-header {
   background-color: #1d1d1d;
   border-bottom: rgb(4, 119, 23) 3px solid;
@@ -73,11 +69,11 @@ body {
 }
 
 .main-button:hover, 
-.submit-button:hover {
+.form-button:hover {
   background-color: rgb(106, 199, 118);
 }
 
-.submit-button:active, 
+.form-button:active, 
 .main-button:active {
   background-color: rgb(157, 199, 164);
 }
@@ -95,10 +91,23 @@ body {
 }
 
 .form-container {
-  display: flex;
-  flex-direction: column;
-  width: 75vw;
-  margin: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1b1b1b9c;
+  display: grid;
+  place-content: center;
+}
+
+.transaction-form {
+  background-color: rgb(56, 56, 56);
+  border: 3px solid rgb(4, 119, 23);
+  min-width: 410px;
+  min-height: 450px;
+  border-radius: 15px;
+  padding: 30px 30px 10px 30px;
 }
 
 .transaction-label {
@@ -126,10 +135,14 @@ body {
   border-radius: 5px;
   border: none;
   height: 30px;
-  width: 50vw;
+  width: 310px;
   padding: 10px;
   color: white;
   margin-bottom: 10px;
+}
+
+.amount-input {
+  width: 267px;
 }
 
 .one-line:focus,
@@ -159,4 +172,42 @@ textarea {
   border: 1px black solid;
   cursor: pointer;
   background-color: rgb(157, 199, 164);
+}
+
+.confirm-transaction-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1b1b1b9c;
+  display: grid;
+  place-content: center;
+}
+
+.confirm-transaction-prompt {
+  background-color: rgb(56, 56, 56);
+  border: 3px solid rgb(4, 119, 23);
+  min-width: 410px;
+  min-height: 450px;
+  border-radius: 15px;
+  padding: 30px 30px 10px 30px;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.confirm-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.display-flex {
+  display: flex;
+  align-items: center;
 }

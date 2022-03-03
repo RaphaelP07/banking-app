@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
-const SignInForm = ({ checkAccounts, getLoggedId, onSignIn, signUpForm }) => {
+import { GlobalContext } from '../context/GlobalState'
+
+const SignInForm = ({ getLoggedId, onSignIn, signUpForm }) => {
+  const { accounts } = useContext(GlobalContext)
+
   const [loggedEmail, setLoggedEmail] = useState('')
   const [loggedPassword, setLoggedPassword] = useState('')
 
@@ -18,7 +22,7 @@ const SignInForm = ({ checkAccounts, getLoggedId, onSignIn, signUpForm }) => {
     }
 
     if (checkEmails.length === 0) {
-      alert('username does not exist')
+      alert('email does not exist')
       return
     }
 
@@ -34,7 +38,7 @@ const SignInForm = ({ checkAccounts, getLoggedId, onSignIn, signUpForm }) => {
     setLoggedPassword('')
   }
 
-  const checkEmails = checkAccounts.filter(account => {
+  const checkEmails = accounts.filter(account => {
     return account.email === loggedEmail
   })
   
@@ -46,7 +50,6 @@ const SignInForm = ({ checkAccounts, getLoggedId, onSignIn, signUpForm }) => {
           <input
             type='email'
             className='username-input one-line'
-            // value={email}
             onChange={(e) => setLoggedEmail(e.target.value)}
           />
         </div>
@@ -55,7 +58,6 @@ const SignInForm = ({ checkAccounts, getLoggedId, onSignIn, signUpForm }) => {
           <input
             type='password'
             className='password-input one-line'
-            // value={accNumber}
             onChange={(e) => setLoggedPassword(e.target.value)}
           />
         </div>
