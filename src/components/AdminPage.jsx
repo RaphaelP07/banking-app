@@ -6,9 +6,8 @@ import AdminDeletePrompt from './AdminDeletePrompt'
 import AdminCreatePrompt from './AdminCreatePrompt'
 
 const AdminPage = () => {
-  const { accounts, deleteAccount, setTransaction } = useContext(GlobalContext)
+  const { accounts, setTransaction } = useContext(GlobalContext)
   const [showTransactionForm, setShowTransactionForm] = useState(false)
-  const [showTransactions, setShowTransactions] = useState(false)
   const [confirmTransaction, setConfirmTransaction] = useState(false)
   const [transactionType, setTransactionType] = useState('')
   const [userId, setUserId] = useState(null)
@@ -41,7 +40,7 @@ const AdminPage = () => {
     accounts.forEach(account => {
       account.id=accounts.indexOf(account) + 1
     })
-  }, [accounts])
+  }, [accounts.length])
 
   const users = accounts.filter(account => {
     return account.isAdmin === false
