@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import AdminTransactionForm from './AdminTransactionForm'
 import AdminConfirmTransaction from './AdminConfirmTransaction'
@@ -37,12 +37,18 @@ const AdminPage = () => {
     setUserId(index)
   }
 
+  useEffect (() => {
+    accounts.forEach(account => {
+      account.id=accounts.indexOf(account) + 1
+    })
+  }, [accounts])
+
   const users = accounts.filter(account => {
     return account.isAdmin === false
   })
 
   return (
-    <div>
+    <div className="main-container">
       <table>
         <thead>
           <tr className='top-row'>
