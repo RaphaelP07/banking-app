@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { GlobalContext } from "../context/GlobalState"
 
 const AdminTransactionForm = ({ cancelTransaction, confirm, getTransferId, userId }) => {
@@ -47,7 +47,6 @@ const AdminTransactionForm = ({ cancelTransaction, confirm, getTransferId, userI
 
     const newTransaction = {
       amount: +amount,
-      timeDate: timeDate,
       notes: notes,
       receipt: receipt,
       transactionType: transactionType,
@@ -78,16 +77,6 @@ const AdminTransactionForm = ({ cancelTransaction, confirm, getTransferId, userI
 
     cancelTransaction()
   }
-
-  let d = new Date ()
-  const year = d.getFullYear()-2000
-  const date = d.getDate() > 9 ? d.getDate() : '0'.concat(d.getDate())
-  const month = d.getMonth()+1 > 9 ? d.getMonth() : '0'.concat(d.getMonth()+1)
-  const hours = d.getHours() > 9 ? d.getHours() : '0'.concat(d.getHours())
-  const minutes = d.getMinutes() > 9 ? d.getMinutes() : '0'.concat(d.getMinutes())
-  const seconds = d.getSeconds() > 9 ? d.getSeconds() : '0'.concat(d.getSeconds())
-
-  setTimeout(() => {setTimeDate(`${hours}:${minutes}:${seconds} on ${month}/${date}/${year}`)}, 1000)
 
   const checkAccNumbers = accounts.filter(account => {
     return account.accNumber === transferTo
