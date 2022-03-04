@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 
 import { GlobalContext } from '../context/GlobalState'
 
-const SignInForm = ({ getLoggedId, onSignIn, signUpForm }) => {
+const SignInForm = ({ getLoggedId, onSignIn, signUpForm, setIsAdmin }) => {
   const { accounts } = useContext(GlobalContext)
 
   const [loggedEmail, setLoggedEmail] = useState('')
@@ -29,6 +29,10 @@ const SignInForm = ({ getLoggedId, onSignIn, signUpForm }) => {
     if (checkEmails[0].password !== loggedPassword) {
       alert('password is incorrect')
       return
+    }
+
+    if (checkEmails[0].isAdmin === true) {
+      setIsAdmin()
     }
 
     onSignIn()

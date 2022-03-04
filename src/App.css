@@ -69,11 +69,13 @@ body {
 }
 
 .main-button:hover, 
+.admin-button:hover, 
 .form-button:hover {
   background-color: rgb(106, 199, 118);
 }
 
 .form-button:active, 
+.admin-button:active, 
 .main-button:active {
   background-color: rgb(157, 199, 164);
 }
@@ -90,7 +92,8 @@ body {
   box-shadow: 4px 4px rgba(4, 119, 23, 0.466);
 }
 
-.form-container {
+.form-container,
+.confirm-transaction-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -101,8 +104,10 @@ body {
   place-content: center;
 }
 
-.transaction-form {
-  background-color: rgb(56, 56, 56);
+.transaction-form,
+.create-account-form,
+.confirm-transaction-prompt {
+  background-color: rgb(43, 43, 43);
   border: 3px solid rgb(4, 119, 23);
   min-width: 410px;
   min-height: 450px;
@@ -174,24 +179,17 @@ textarea {
   background-color: rgb(157, 199, 164);
 }
 
-.confirm-transaction-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #1b1b1b9c;
-  display: grid;
-  place-content: center;
-}
-
-.confirm-transaction-prompt {
-  background-color: rgb(56, 56, 56);
-  border: 3px solid rgb(4, 119, 23);
-  min-width: 410px;
-  min-height: 450px;
-  border-radius: 15px;
-  padding: 30px 30px 10px 30px;
+.admin-button {
+  font-family: sans-serif;
+  font-size: small;
+  padding: 2px;
+  margin: 2px;
+  margin-left: 0;
+  width: fit-content;
+  border-radius: 5px;
+  border: 1px black solid;
+  cursor: pointer;
+  background-color: rgb(157, 199, 164);
 }
 
 .margin-left {

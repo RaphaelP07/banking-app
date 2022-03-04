@@ -1,29 +1,62 @@
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useReducer } from 'react'
 import AppReducer from './AppReducer'
 
 // Initial state
 const initialState = {
   accounts: [
     {
+      accNumber: null,
+      accAmount: null,
+      isAdmin: true,
+      email: "admin@admin.com",
+      firstName: "John",
+      id: 1,
+      lastName: "Smith",
+      password: "1234",
+      transactions: null
+    },
+    {
       accNumber: "222502-104008-088",
-      accAmount: 100,
-      admin: false,
+      accAmount: 15000,
+      isAdmin: false,
       email: "raphaelpadua@gmail.com",
       firstName: "Raphael",
-      id: 1,
+      id: 2,
       lastName: "Padua",
       password: "0707",
       transactions: []
     },
     {
-      accAmount: 700,
+      accAmount: 27700,
       accNumber: "222502-114025-181",
-      admin: false,
+      isAdmin: false,
       email: "cmsd@gmail.com",
-      firstName: "Christine Mae",
-      id: 2,
+      firstName: "Christine",
+      id: 3,
       lastName: "Defensor",
       password: "0707",
+      transactions: []
+    },
+    {
+      accNumber: "220203-141312-088",
+      accAmount: 5200,
+      isAdmin: false,
+      email: "paul@gmail.com",
+      firstName: "Paul",
+      id: 4,
+      lastName: "Mendiola",
+      password: "1234",
+      transactions: []
+    },
+    {
+      accNumber: "220403-225621-088",
+      accAmount: 3000,
+      isAdmin: false,
+      email: "philip@gmail.com",
+      firstName: "Philip",
+      id: 5,
+      lastName: "Nadal",
+      password: "1234",
       transactions: []
     }
   ],
@@ -52,6 +85,13 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function deleteAccount(id) {
+    dispatch({
+      type: 'DELETE_ACCOUNT',
+      payload: id
+    })
+  }
+
   function setTransaction(transaction) {
     dispatch({
       type: 'SET_TRANSACTION',
@@ -65,7 +105,8 @@ export const GlobalProvider = ({ children }) => {
         accounts: state.accounts,
         transaction: state.transaction,
         addAccount,
-        setTransaction,
+        deleteAccount,
+        setTransaction
       }}>
       {children}
     </GlobalContext.Provider>

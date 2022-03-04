@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react'
 import SignInForm from './components/SignInForm.jsx'
 import SignUpForm from './components/SignUpForm.jsx'
+import AdminPage from './components/AdminPage.jsx'
 import BankAccount from './components/BankAccount.jsx'
 import MainButtons from './components/MainButtons.jsx'
 import AccountName from './components/AccountName.jsx'
@@ -13,6 +14,7 @@ import { GlobalProvider } from './context/GlobalState'
 
 function App() {
   const [isLogged, setIsLogged] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [showTransactionForm, setShowTransactionForm] = useState(false)
   const [showConfirmPrompt, setShowConfirmPrompt] = useState(false)
@@ -24,26 +26,22 @@ function App() {
   return (
     <GlobalProvider className="App">
       <header className="App-header">
-        <p>
-          banking app
-        </p>
+        <p>banking app</p>
       </header>
-      {
-        !isLogged ? 
-          <section className="sign-form-container">
-            {
-            !signUp ? 
-              <SignInForm 
-                onSignIn={() => setIsLogged(true)}
-                signUpForm={() => setSignUp(true)}
-                getLoggedId={(index) => setLoggedId(index)} /> 
-              : 
-              <SignUpForm 
-                backToSignIn={() => setSignUp(false)} />
-            }
-          </section>
-        :
-        <div className='main-container'>
+      {!isLogged ? 
+        <section className="sign-form-container">
+          {!signUp ? 
+            <SignInForm 
+              onSignIn={() => setIsLogged(true)} 
+              signUpForm={() => setSignUp(true)}
+              setIsAdmin={() => setIsAdmin(true)}
+              getLoggedId={(index) => setLoggedId(index)} /> 
+            : <SignUpForm backToSignIn={() => setSignUp(false)} />}
+        </section> 
+      : 
+        isAdmin ? 
+        <AdminPage /> 
+      : <div className='main-container'>
           <section className='account-name'>
             <AccountName loggedId={loggedId} />
           </section>
@@ -73,8 +71,7 @@ function App() {
           <section className='expenses-container'>
             {showTransactions && <Transactions loggedId={loggedId}/>}
           </section>
-        </div>
-      }
+        </div>}
     </GlobalProvider>
   );
 }

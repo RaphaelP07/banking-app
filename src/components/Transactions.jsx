@@ -23,7 +23,6 @@ const Transactions = ({ loggedId }) => {
             <th>{transaction.notes}</th>
             <th>{transaction.timeDate}</th>
           </tr>)}
-
         </tbody>
       </table>
     </div>

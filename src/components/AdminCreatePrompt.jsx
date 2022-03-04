@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 
 import { GlobalContext } from '../context/GlobalState'
 
-const SignUpForm = ({ backToSignIn }) => {
+const AdminCreatePrompt = ({ onDone }) => {
   const { accounts, addAccount } = useContext(GlobalContext)
 
   const [firstName, setFirstName] = useState('')
@@ -34,13 +34,8 @@ const SignUpForm = ({ backToSignIn }) => {
       return
     }
 
-    if (accAmount > 25000) {
-      alert('maximum initial deposit is PHP25,000')
-      return
-    }
-
     const newAccount = {
-      accAmount: accAmount,
+      accAmount: +accAmount,
       accNumber: accNumber,
       isAdmin: isAdmin,
       email: email,
@@ -60,7 +55,7 @@ const SignUpForm = ({ backToSignIn }) => {
     setConfirmPassword('')
     setAccNumber('')
 
-    backToSignIn()
+    onDone()
   }
 
   const generateAccNumber = () => {
@@ -83,8 +78,11 @@ const SignUpForm = ({ backToSignIn }) => {
   }
 
   return (
-    <div>
-      <form className="sign-in-form" onSubmit={signUp}>
+    <div className='form-container'>
+      <form className="create-account-form" onSubmit={signUp}>
+      <header>
+        <h2>CREATE ACCOUNT</h2>
+      </header>
         <div className='input-container'>
           <label className='form-label'>First name</label>
           <input
@@ -147,13 +145,13 @@ const SignUpForm = ({ backToSignIn }) => {
         <div className="form-buttons-container">
           <input 
             type='submit' 
-            value='SIGN UP' 
+            value='CREATE' 
             className='sign-in-button form-button' 
             onClick={generateAccNumber} 
           />
           <button 
             className="cancel-sign-up form-button" 
-            onClick={backToSignIn}>
+            onClick={onDone}>
               CANCEL
           </button>
         </div>
@@ -162,4 +160,4 @@ const SignUpForm = ({ backToSignIn }) => {
   )
 }
 
-export default SignUpForm
+export default AdminCreatePrompt
