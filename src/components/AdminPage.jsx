@@ -42,6 +42,10 @@ const AdminPage = () => {
     })
   }, [accounts.length])
 
+  useEffect (() => {
+    localStorage.setItem("bankaccounts", JSON.stringify(accounts))
+  })
+
   const users = accounts.filter(account => {
     return account.isAdmin === false
   })
