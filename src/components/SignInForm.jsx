@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { GlobalContext } from '../context/GlobalState'
 
-const SignInForm = ({ getLoggedId, onSignIn, signUpForm, setIsAdmin }) => {
+const SignInForm = ({ getLoggedId, signUpForm, setIsAdmin }) => {
   const { accounts } = useContext(GlobalContext)
+  let navigate = useNavigate()
 
   const [loggedEmail, setLoggedEmail] = useState('')
   const [loggedPassword, setLoggedPassword] = useState('')
@@ -31,12 +33,14 @@ const SignInForm = ({ getLoggedId, onSignIn, signUpForm, setIsAdmin }) => {
       return
     }
 
-    if (checkEmails[0].isAdmin === true) {
-      setIsAdmin()
-    }
-
-    onSignIn()
     getLoggedId(checkEmails[0].id-1)
+
+    if (checkEmails[0].isAdmin === false) {
+      navigate('/banking-app/dashboard')
+    } else {
+      setIsAdmin()
+      navigate('/banking-app/admin-page')
+    }
 
     setLoggedEmail('')
     setLoggedPassword('')
@@ -47,30 +51,36 @@ const SignInForm = ({ getLoggedId, onSignIn, signUpForm, setIsAdmin }) => {
   })
   
   return (
-    <div>
-      <form className="sign-in-form" onSubmit={signIn}>
-        <div className='input-container'>
-          <label className='form-label'>Email</label>
-          <input
-            type='email'
-            className='username-input one-line'
-            onChange={(e) => setLoggedEmail(e.target.value)}
-          />
-        </div>
-        <div className='input-container'>
-          <label className='form-label'>Password</label>
-          <input
-            type='password'
-            className='password-input one-line'
-            onChange={(e) => setLoggedPassword(e.target.value)}
-          />
-        </div>
-        <div className="form-buttons-container">
-          <input type='submit' value='SIGN IN' className='sign-in-button form-button' />
-          <button className="sign-up form-button" onClick={signUpForm}>SIGN UP</button>
-        </div>
-      </form>
+    <div className="sign">
+      <section className="sign-form-container"> 
+        <h1 className='form-header-text'>Sign In</h1>
+        <form className="sign-in-form" onSubmit={signIn}>
+          <div className='input-container'>
+            <label className='form-label'>Email</label>
+            <input
+              type='email'
+              className='username-input one-line'
+              onChange={(e) => setLoggedEmail(e.target.value)}
+            />
+          </div>
+          <div className='input-container'>
+            <label className='form-label'>Password</label>
+            <input
+              type='password'
+              className='password-input one-line'
+              onChange={(e) => setLoggedPassword(e.target.value)}
+            />
+          </div>
+          <div className="form-buttons-container">
+            <input type='submit' value='SIGN IN' className='sign-in-button form-button' />
+            <Link to="/banking-app/sign-up">
+              <button className="sign-up form-button" onClick={() => signUpForm()}>SIGN UP</button>
+            </Link>
+          </div>
+        </form>
+      </section>
     </div>
+    
   )
 }
 

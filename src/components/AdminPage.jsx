@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import { useNavigate } from 'react-router-dom'
 import AdminTransactionForm from './AdminTransactionForm'
 import AdminConfirmTransaction from './AdminConfirmTransaction'
 import AdminDeletePrompt from './AdminDeletePrompt'
 import AdminCreatePrompt from './AdminCreatePrompt'
 
-const AdminPage = () => {
+const AdminPage = ({ isAdmin }) => {
   const { accounts, setTransaction } = useContext(GlobalContext)
   const [showTransactionForm, setShowTransactionForm] = useState(false)
   const [confirmTransaction, setConfirmTransaction] = useState(false)
@@ -14,6 +15,15 @@ const AdminPage = () => {
   const [transferId, setTransferId] = useState(null)
   const [deleteAccountPrompt, setDeleteAccountPrompt] = useState(false)
   const [createAccountPrompt, setCreateAccountPrompt] = useState(false)
+
+  let navigate = useNavigate()
+
+  useEffect (() => {
+    if (isAdmin === false) {
+      alert('Only for authorized users')
+      navigate('/banking-app')
+    }
+  }, [])
 
   const selectTransaction = (index) => {
     setShowTransactionForm(true)

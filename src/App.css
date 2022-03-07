@@ -20,11 +20,37 @@ body {
   color: white;
 }
 
-.sign-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.sign {
+  display: grid;
+  place-content: center;
   height: 100vh;
+}
+
+.form-header-text {
+  color: rgb(157, 199, 164);
+  font-weight: 400;
+  margin-bottom: 30px;
+  font-size: 60px;
+}
+
+.sign-form-container {
+  display: grid;
+  place-content: center;
+  box-shadow: 4px 4px rgba(4, 119, 23, 0.466);
+  background-color: #1b1b1b;
+  border-radius: 15px;
+  min-height: 400px;
+  width: 370px;
+}
+
+.sign-up-form-container {
+  display: grid;
+  place-content: center;
+  box-shadow: 4px 4px rgba(4, 119, 23, 0.466);
+  background-color: #1b1b1b;
+  border-radius: 15px;
+  height: 680px;
+  width: 370px;
 }
 
 .form-buttons-container {
@@ -39,10 +65,11 @@ body {
   align-items: center;
 }
 
-.account-name {
+.account-name-container {
   margin: 5px;
   width: 75vw;
   display: flex;
+  align-items: center;
 }
 
 .account-container {
@@ -55,7 +82,6 @@ body {
   width: 25vw;
   margin-top: 4px;
   margin-left: 4px;
-  /* width: 40vw; */
 }
 
 .main-button {
@@ -177,6 +203,21 @@ textarea {
   border: 1px black solid;
   cursor: pointer;
   background-color: rgb(157, 199, 164);
+}
+
+.logout-button {
+  padding: 7px;
+  width: 80px;
+  margin-left: 10px;
+  background-color: rgb(199, 157, 157);
+}
+
+.logout-button:hover {
+  background-color: rgb(224, 95, 95);
+}
+
+.logout-button:active {
+  background-color: rgb(199, 157, 157);
 }
 
 .admin-button {
