@@ -32,7 +32,7 @@ function App() {
         <Routes>
           <Route
             path= '/banking-app'
-            element={<SignInForm onSignIn={() => setIsLogged(true)} setIsAdmin={() => setIsAdmin(true)} getLoggedId={(index) => setLoggedId(index)} /> }
+            element={<SignInForm setIsAdmin={() => setIsAdmin(true)} getLoggedId={(index) => setLoggedId(index)} /> }
           />
           <Route
             path= 'banking-app/sign-up'

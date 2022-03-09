@@ -23,13 +23,8 @@ const SignInForm = ({ getLoggedId, signUpForm, setIsAdmin }) => {
       return
     }
 
-    if (checkEmails.length === 0) {
-      alert('email does not exist')
-      return
-    }
-
-    if (checkEmails[0].password !== loggedPassword) {
-      alert('password is incorrect')
+    if (checkEmails.length === 0 || checkEmails[0].password !== loggedPassword) {
+      alert('email or password is incorrect')
       return
     }
 

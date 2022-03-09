@@ -40,7 +40,7 @@ const SignUpForm = ({ backToSignIn }) => {
     }
 
     if (accAmount > 100000) {
-      alert('maximum initial deposit is PHP25,000')
+      alert('maximum initial deposit is PHP100,000')
       return
     }
 
